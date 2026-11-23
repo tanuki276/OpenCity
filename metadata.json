@@ -1,0 +1,5 @@
+{
+  "name": "Reduced-Town",
+  "description": "Stage 1 GTA-like open-world city prototype for Android (Godot 4.7) with a live playable WebGL preview: 5x5 American urban/suburban grid, gait-synced third-person player, and drivable sport sedan.",
+  "requestFramePermissions": []
+}

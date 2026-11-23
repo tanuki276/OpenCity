@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/camera/SpringCameraRig.gd" id="1_cam"]
+
+[node name="CameraRig" type="Node3D"]
+script = ExtResource("1_cam")
+
+[node name="PitchPivot" type="Node3D" parent="."]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="PitchPivot"]
+collision_mask = 9
+spring_length = 4.6
+margin = 0.28
+
+[node name="Camera3D" type="Camera3D" parent="PitchPivot/SpringArm3D"]
+current = true
+fov = 66.0
+near = 0.12
+far = 260.0

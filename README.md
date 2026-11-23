@@ -1,11 +1,25 @@
-<div align="center">
+# Reduced-Town
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+GTA-likeなオープンワールド都市ゲームの個人プロジェクト。歩いて、車を盗んで、走って、追われて、配達する。「GTA6そのもの」ではなく、GTAらしさの骨格（徒歩⇔運転の切り替え、交通、手配度、ミッション）を一人で作れる規模に分解して実装する。
 
-  <h1>Built with AI Studio</h2>
+## 技術方針
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+- エンジン: Godot 4.7（GL Compatibility、Android優先）
+- 主言語: GDScript。ゲームロジックは全部GDScriptで書き、性能が問題になった箇所だけC++ GDExtensionを検討する
+- 街の見た目: KayKit / Kenney 等の CC0 アセットを実形状・実テクスチャのまま使う（Tokyo Walk 3D の資産パイプラインの考え方を流用。出所とライセンスは THIRD_PARTY_ASSETS.md に記録する）
+- 世界: 手続き生成ではなく、グリッド街区の固定レイアウトを土台に作り込む（GAT6方式。1つの街を磨く）
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+## 開発段階
 
-</div>
+- **Stage 1（現在の対象）**: グリッド街区の街＋三人称の徒歩移動＋運転できる車1台（乗降あり）。ここがGTA化の成否の全て
+- Stage 2: 交通（他車が道路グリッドを走る）
+- Stage 3: 歩行者と警察・手配度（星）システム
+- Stage 4: 配達ミッション（1テンプレートから量産）
+- Stage 5: ミニマップ、昼夜サイクル、ラジオ等の増幅装置
+
+各Stageの仕様は docs/ に置く。Stage 1 の仕様は docs/stage1-spec.md。
+
+## やらないこと
+
+- 本家GTA規模の物量（都市の広さ、NPCの密度、ストーリーミッションの作り込み）は追わない
+- 課金・広告・アカウント・解析は入れない

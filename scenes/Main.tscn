@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/City.tscn" id="1_city"]
+[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="2_player"]
+[ext_resource type="PackedScene" path="res://scenes/Vehicle.tscn" id="3_vehicle"]
+[ext_resource type="PackedScene" path="res://scenes/CameraRig.tscn" id="4_cam"]
+[ext_resource type="PackedScene" path="res://scenes/HUD.tscn" id="5_hud"]
+[ext_resource type="Script" path="res://scripts/core/GameCoordinator.gd" id="6_coord"]
+[ext_resource type="Script" path="res://scripts/world/AmbientAudio.gd" id="7_amb"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_afternoon"]
+sky_top_color = Color(0.22, 0.49, 0.84, 1)
+sky_horizon_color = Color(0.76, 0.84, 0.91, 1)
+sky_curve = 0.16
+ground_bottom_color = Color(0.24, 0.23, 0.21, 1)
+ground_horizon_color = Color(0.72, 0.77, 0.8, 1)
+sun_angle_max = 20.0
+sun_curve = 0.12
+
+[sub_resource type="Sky" id="Sky_afternoon"]
+sky_material = SubResource("ProceduralSkyMaterial_afternoon")
+
+[sub_resource type="Environment" id="Environment_afternoon"]
+background_mode = 2
+sky = SubResource("Sky_afternoon")
+ambient_light_source = 3
+ambient_light_sky_contribution = 0.76
+ambient_light_energy = 0.74
+tonemap_mode = 3
+tonemap_exposure = 0.95
+tonemap_white = 6.0
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.76, 0.84, 0.91, 1)
+fog_light_energy = 1.0
+fog_sun_scatter = 0.24
+fog_density = 0.62
+fog_aerial_perspective = 0.32
+fog_depth_begin = 42.0
+fog_depth_end = 158.0
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_afternoon")
+
+[node name="SunLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.743145, 0.411958, -0.527282, 0, 0.788011, 0.615661, 0.669131, -0.457525, 0.585607, 0, 28, 0)
+light_color = Color(1, 0.94, 0.84, 1)
+light_energy = 1.38
+shadow_enabled = true
+shadow_bias = 0.04
+shadow_normal_bias = 1.4
+directional_shadow_mode = 1
+directional_shadow_split_1 = 0.24
+directional_shadow_fade_start = 0.82
+directional_shadow_max_distance = 115.0
+
+[node name="AmbientAudio" type="AudioStreamPlayer" parent="."]
+script = ExtResource("7_amb")
+
+[node name="City" parent="." instance=ExtResource("1_city")]
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+
+[node name="Vehicle" parent="." instance=ExtResource("3_vehicle")]
+
+[node name="CameraRig" parent="." instance=ExtResource("4_cam")]
+
+[node name="HUD" parent="." instance=ExtResource("5_hud")]
+
+[node name="GameCoordinator" type="Node" parent="."]
+script = ExtResource("6_coord")
+player_path = NodePath("../Player")
+vehicle_path = NodePath("../Vehicle")
+camera_rig_path = NodePath("../CameraRig")
+hud_path = NodePath("../HUD")
