@@ -225,7 +225,7 @@ func find_safe_exit_position() -> Vector3:
 		Vector3(0.0, 2.35, 0.0),      # Roof fallback
 	]
 	for local_off in local_candidates:
-		var world_pos := global_transform * local_off
+		var world_pos: Vector3 = global_transform * local_off
 		var query := PhysicsShapeQueryParameters3D.new()
 		query.shape = shape
 		query.transform = Transform3D(Basis.IDENTITY, world_pos)
